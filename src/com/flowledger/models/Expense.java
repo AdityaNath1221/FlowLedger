@@ -15,4 +15,9 @@ public class Expense{
         this.date = date;
         this.description = description;
     }
+
+    public String getExpenseDetails(){
+        String details = this.amount + "|" + this.category + "|" + this.date + "|" + this.description;
+        return details;
+    }
 }
