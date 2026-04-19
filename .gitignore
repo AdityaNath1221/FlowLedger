@@ -1,5 +1,6 @@
 # Compiled class file
-*.class
+out/com/flowledger/app/*.class
+out/com/flowledger/models/*.class
 
 # Log file
 *.log
