@@ -1,12 +1,17 @@
 package com.flowledger.services;
 
 import com.flowledger.models.Expense;
-import java.util.ArrayList;
+
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.time.LocalDate;
 
 public class ExpenseManager{
-    ArrayList<Expense> expenses = new ArrayList<Expense>();
+    ArrayList<Expense> expenses;
+
+    public ExpenseManager(){
+        expenses = new ArrayList<Expense>();
+    }
 
     public void addExpense(Expense e){
         expenses.add(e);
