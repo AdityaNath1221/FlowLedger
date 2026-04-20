@@ -40,6 +40,7 @@ public class ConsoleUI{
             switch(choice){
                 case -1:
                     System.out.print("\n===== Exiting the Program =====\n");
+                    InputHelper.close();
                     return false;
 
                 case 1:

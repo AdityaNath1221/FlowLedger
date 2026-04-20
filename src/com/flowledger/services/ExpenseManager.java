@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 
 public class ExpenseManager{
-    ArrayList<Expense> expenses;
+    private ArrayList<Expense> expenses;
 
     public ExpenseManager(){
         expenses = new ArrayList<Expense>();

@@ -8,6 +8,10 @@ import java.util.Scanner;
 public class InputHelper {
     private static final Scanner sc = new Scanner(System.in);
 
+    public static void close(){
+        sc.close();
+    }
+
     public static int getChoice(){
         while(true){
             System.out.print("\nEnter choice: ");
@@ -72,7 +76,6 @@ public class InputHelper {
             }
             else{
                 System.out.print("\n===== Error: Category blank =====\n");
-                sc.nextLine();
             }
         }
     }
