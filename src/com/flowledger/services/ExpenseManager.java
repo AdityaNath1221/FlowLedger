@@ -17,19 +17,21 @@ public class ExpenseManager{
         expenses.add(e);
     }
 
-    public ArrayList<String> getAllExpense(){
-        ArrayList<String> allExpenses = new ArrayList<String>();
+    public ArrayList<Expense> getAllExpense(){
+        return expenses;
+    }
+
+    public void editExpense(int ID, double amount, String category, LocalDate date, String description){
         for(Expense e: expenses){
-            allExpenses.add(e.getExpenseDetails());
+            if(e.getID() == ID){
+                e.setDetails(amount, category, date, description);
+                return;
+            }
         }
-        return allExpenses;
+        System.out.println("Expense Not Found.");
     }
 
-    public void editExpense(){
-        System.out.println("\nEdit Expense\n");
-    }
-
-    public void deleteExpense(){
-        System.out.println("\nDelete Expense\n");
+    public void deleteExpense(int ID){
+        expenses.removeIf(e -> e.getID() == ID);
     }
 }
