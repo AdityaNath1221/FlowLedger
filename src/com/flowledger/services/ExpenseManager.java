@@ -21,17 +21,17 @@ public class ExpenseManager{
         return expenses;
     }
 
-    public void editExpense(int ID, double amount, String category, LocalDate date, String description){
+    public boolean editExpense(int ID, double amount, String category, LocalDate date, String description){
         for(Expense e: expenses){
             if(e.getID() == ID){
                 e.setDetails(amount, category, date, description);
-                return;
+                return true;
             }
         }
-        System.out.println("Expense Not Found.");
+        return false;
     }
 
-    public void deleteExpense(int ID){
-        expenses.removeIf(e -> e.getID() == ID);
+    public boolean deleteExpense(int ID){
+        return expenses.removeIf(e -> e.getID() == ID);
     }
 }
