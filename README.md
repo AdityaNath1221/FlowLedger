@@ -14,12 +14,20 @@ It allows users to record, view, edit, and manage expenses using a clean, layere
 * 🔢 Auto-generated unique IDs
 * 🧠 Clean layered architecture (UI → Service → Model)
 
-### 🔥 v1.1.0 (Latest)
+### 🔥 v1.1.0
 
 * ✏️ Edit existing expenses
 * ❌ Delete expenses by ID
 * 🧩 Full CRUD support (Create, Read, Update, Delete)
 * 🧾 Improved CLI interaction flow
+
+### ⚡ v1.1.1 (Latest)
+
+* 🛡️ Robust input validation (no more crashes on invalid input)
+* 🔁 Safe input handling using centralized `InputHelper` utility
+* 📅 Flexible date parsing (multiple formats supported)
+* 💬 Improved CLI error messages and user feedback
+* 🧠 Better separation of concerns (cleaner UI logic)
 
 ---
 
@@ -31,7 +39,8 @@ src/
     └── flowledger/
         ├── app/        # Entry point & Console UI
         ├── services/   # Business logic
-        └── models/     # Data models
+        ├── models/     # Data models
+        └── utility/    # Input handling utilities
 ```
 
 ---
@@ -44,9 +53,12 @@ FlowLedger follows a layered design:
 * **ConsoleUI** → handles user interaction
 * **ExpenseManager** → manages business logic
 * **Expense** → represents expense data
+* **InputHelper** → handles validated user input
 
 ```
 Main → ConsoleUI → ExpenseManager → Expense
+           ↓
+      InputHelper
 ```
 
 ---
@@ -98,11 +110,12 @@ Enter -1 to Exit.
 
 ## 🎯 Roadmap
 
-### 🔧 v1.1.1 (Upcoming)
+### 🔧 v1.1.2 (Upcoming)
 
-* Input validation (prevent crashes)
-* Graceful error handling
-* Improved user feedback
+* Fix incorrect success messages for edit/delete
+* Improve ID validation (handle non-existent IDs properly)
+* Remove null returns from service layer
+* Return operation status from service methods
 
 ### 💾 v1.2.0 (Planned)
 
@@ -119,7 +132,7 @@ Enter -1 to Exit.
 
 ## 🏷️ Version
 
-**v1.1.0** – Added edit and delete functionality (full CRUD support)
+**v1.1.1** – Added robust input validation and improved CLI interaction
 
 ---
 
@@ -132,5 +145,3 @@ This project is licensed under the MIT License.
 ## 🙌 Acknowledgment
 
 Built as part of a hands-on journey to learn Java, OOP, and real-world system design.
-
----
