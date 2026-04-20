@@ -13,8 +13,8 @@ public class ExpenseManager{
         expenses = new ArrayList<Expense>();
     }
 
-    public void addExpense(Expense e){
-        expenses.add(e);
+    public boolean addExpense(Expense e){
+        return expenses.add(e);
     }
 
     public ArrayList<Expense> getAllExpense(){

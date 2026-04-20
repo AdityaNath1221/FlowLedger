@@ -43,8 +43,12 @@ public class ConsoleUI{
                     return false;
 
                 case 1:
-                    expenseManager.addExpense(fetchExpenseDetails());
-                    System.out.print("\n===== Expense added successfully . =====\n");
+                    if(expenseManager.addExpense(fetchExpenseDetails())){
+                        System.out.print("\n===== Expense added successfully =====\n");
+                    }
+                    else{
+                        System.out.print("\n===== Expense could not be added =====\n");
+                    }
                     break;
 
                 case 2:
@@ -72,8 +76,12 @@ public class ConsoleUI{
                         }
                         System.out.print("\n===== EXPENSES =====\n");
                         uID = InputHelper.getID("\nEnter the ID of expense you want to delete: ",c);
-                        expenseManager.deleteExpense(uID);
-                        System.out.print("\n===== Expense deleted successfully . =====\n");
+                        if(expenseManager.deleteExpense(uID)){
+                            System.out.print("\n===== Expense deleted successfully =====\n");
+                        }
+                        else{
+                            System.out.print("\n===== Expense not found =====\n");
+                        }
                     }
                     else{
                         System.out.print("\n===== No Expenses Found =====\n");
@@ -96,8 +104,12 @@ public class ConsoleUI{
                         LocalDate date = InputHelper.getDate();
                         String description = InputHelper.getDescription();
                         System.out.println();
-                        expenseManager.editExpense(uID, amount, category, date, description);
-                        System.out.print("\n===== Expense edited successfully . =====\n");
+                        if(expenseManager.editExpense(uID, amount, category, date, description)){
+                            System.out.print("\n===== Expense edited successfully =====\n");
+                        }
+                        else{
+                            System.out.print("\n===== Expense not found =====\n");
+                        }
                     }
                     else{
                         System.out.print("\n===== No Expenses Found =====\n");
