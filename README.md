@@ -21,13 +21,22 @@ It allows users to record, view, edit, and manage expenses using a clean, layere
 * 🧩 Full CRUD support (Create, Read, Update, Delete)
 * 🧾 Improved CLI interaction flow
 
-### ⚡ v1.1.1 (Latest)
+### ⚡ v1.1.1
 
 * 🛡️ Robust input validation (no more crashes on invalid input)
 * 🔁 Safe input handling using centralized `InputHelper` utility
 * 📅 Flexible date parsing (multiple formats supported)
 * 💬 Improved CLI error messages and user feedback
 * 🧠 Better separation of concerns (cleaner UI logic)
+
+### 🚀 v1.1.2 (Latest)
+
+* ✅ Accurate success/failure feedback for edit and delete operations
+* 🧠 Removed flawed ID range validation (now checks actual existence)
+* 🔁 Service layer returns operation status (`boolean`)
+* ❌ Eliminated misleading success messages
+* 🧼 Cleaned up input handling and minor bugs
+* 🔒 Proper resource handling (Scanner closed on exit)
 
 ---
 
@@ -110,14 +119,7 @@ Enter -1 to Exit.
 
 ## 🎯 Roadmap
 
-### 🔧 v1.1.2 (Upcoming)
-
-* Fix incorrect success messages for edit/delete
-* Improve ID validation (handle non-existent IDs properly)
-* Remove null returns from service layer
-* Return operation status from service methods
-
-### 💾 v1.2.0 (Planned)
+### 💾 v1.2.0 (Next)
 
 * File-based persistence (save & load expenses)
 * Data retention across sessions
@@ -132,7 +134,7 @@ Enter -1 to Exit.
 
 ## 🏷️ Version
 
-**v1.1.1** – Added robust input validation and improved CLI interaction
+**v1.1.2** – Stability and correctness improvements with reliable CRUD operations
 
 ---
 
