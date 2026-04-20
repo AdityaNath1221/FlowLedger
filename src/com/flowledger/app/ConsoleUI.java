@@ -27,7 +27,7 @@ public class ConsoleUI{
     public boolean start(){
         System.out.print("\n===== Expense Tracker Console UI =====\n");
         ArrayList<Expense> expenses;
-        int c, uID;
+        int uID;
         while(true){
             System.out.print("\nChoice List:");
             System.out.print("\nEnter 1 to Add a new Expense.");
@@ -69,13 +69,11 @@ public class ConsoleUI{
                     expenses = expenseManager.getAllExpense();
                     if(!expenses.isEmpty()){
                         System.out.print("\n===== EXPENSES =====\n");
-                        c=0;
                         for(Expense e: expenses){
                             System.out.print(e);
-                            c++;
                         }
                         System.out.print("\n===== EXPENSES =====\n");
-                        uID = InputHelper.getID("\nEnter the ID of expense you want to delete: ",c);
+                        uID = InputHelper.getID("\nEnter the ID of expense you want to delete: ");
                         if(expenseManager.deleteExpense(uID)){
                             System.out.print("\n===== Expense deleted successfully =====\n");
                         }
@@ -92,18 +90,15 @@ public class ConsoleUI{
                     expenses = expenseManager.getAllExpense();
                     if(!expenses.isEmpty()){
                         System.out.print("\n===== EXPENSES =====\n");
-                        c=0;
                         for(Expense e: expenses){
                             System.out.println(e);
-                            c++;
                         }
                         System.out.print("\n===== EXPENSES =====\n");
-                        uID = InputHelper.getID("\nEnter the ID of expense you want to edit: ",c);
+                        uID = InputHelper.getID("\nEnter the ID of expense you want to edit: ");
                         double amount = InputHelper.getAmount();
                         String category = InputHelper.getCategory();
                         LocalDate date = InputHelper.getDate();
                         String description = InputHelper.getDescription();
-                        System.out.println();
                         if(expenseManager.editExpense(uID, amount, category, date, description)){
                             System.out.print("\n===== Expense edited successfully =====\n");
                         }

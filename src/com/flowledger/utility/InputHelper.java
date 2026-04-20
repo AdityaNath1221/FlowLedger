@@ -23,13 +23,13 @@ public class InputHelper {
         }
     }
 
-    public static int getID(String msg, int max){
+    public static int getID(String msg){
         while(true){
             System.out.print(msg);
             if(sc.hasNextInt()){
                 int ID = sc.nextInt();
                 sc.nextLine();
-                if(ID>0&&ID<=max){
+                if(ID>0){
                     return ID;
                 }
                 else{
@@ -38,6 +38,7 @@ public class InputHelper {
             }
             else{
                 System.out.print("\n===== Error: Invalid number =====\n");
+                sc.nextLine();
             }
         }
     }
@@ -71,6 +72,7 @@ public class InputHelper {
             }
             else{
                 System.out.print("\n===== Error: Category blank =====\n");
+                sc.nextLine();
             }
         }
     }
