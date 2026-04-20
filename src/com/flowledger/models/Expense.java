@@ -22,8 +22,7 @@ public class Expense{
     // }
 
     public String toString(){
-        String str = "\n===== ID#"+ID+" =====\n"+"\nAmount: "+amount+"\n\nCategory: "+category+"\n\nDate: "+date+"\n\nDescription: "+description;
-        return str;
+        return "\n===== ID#"+ID+" =====\n"+"\nAmount: "+amount+"\nCategory: "+category+"\nDate: "+date+"\nDescription: "+description+"\n";
     }
 
     public int getID(){

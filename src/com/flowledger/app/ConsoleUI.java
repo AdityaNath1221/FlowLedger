@@ -2,99 +2,111 @@ package com.flowledger.app;
 
 import com.flowledger.models.Expense;
 import com.flowledger.services.ExpenseManager;
+import com.flowledger.utility.InputHelper;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ConsoleUI{
-    private static ExpenseManager expenseManager;
-    private static Scanner sc;
-    private static int ID = 1;
-    private static Expense e;
-    private static ArrayList<Expense> expenses;
+    private ExpenseManager expenseManager;
+    private int ID = 1;
 
     public ConsoleUI(){
         expenseManager = new ExpenseManager();
-        sc = new Scanner(System.in);
     }
 
-    private static Expense fetchExpenseDetails(){
-        System.out.println();
-        System.out.print("Enter the amount: ");
-        double amount = Double.parseDouble(sc.nextLine());
-        System.out.print("Enter the category: ");
-        String category = sc.nextLine();
-        System.out.print("Enter the date(YYYY-MM-DD): ");
-        LocalDate date = LocalDate.parse(sc.nextLine());
-        System.out.print("Enter the description: ");
-        String description = sc.nextLine();
-        System.out.println();
+    private Expense fetchExpenseDetails(){
+        double amount = InputHelper.getAmount();
+        String category = InputHelper.getCategory();
+        LocalDate date = InputHelper.getDate();
+        String description = InputHelper.getDescription();
         Expense e = new Expense(ID, amount, category, date, description);
         ID++;
         return e;
     }
 
     public boolean start(){
-        System.out.println("\n===== Expense Tracker Console UI =====\n");
+        System.out.print("\n===== Expense Tracker Console UI =====\n");
+        ArrayList<Expense> expenses;
+        int c, uID;
         while(true){
-            System.out.println();
-            System.out.println("Enter 1 to Add a new Expense.");
-            System.out.println("Enter 2 to view all Expenses.");
-            System.out.println("Enter 3 to delete an Expense.");
-            System.out.println("Enter 4 to edit an Expense.");
-            System.out.println("Enter -1 to exit.");
-            System.out.print("\nEnter Choice: ");
-            String choice = sc.nextLine();
+            System.out.print("\nChoice List:");
+            System.out.print("\nEnter 1 to Add a new Expense.");
+            System.out.print("\nEnter 2 to view all Expenses.");
+            System.out.print("\nEnter 3 to delete an Expense.");
+            System.out.print("\nEnter 4 to edit an Expense.");
+            System.out.print("\nEnter -1 to exit.\n");
+            int choice = InputHelper.getChoice();
 
             switch(choice){
-                case "-1":
+                case -1:
+                    System.out.print("\n===== Exiting the Program =====\n");
                     return false;
 
-                case "1":
-                    e = fetchExpenseDetails();
-                    expenseManager.addExpense(e);
+                case 1:
+                    expenseManager.addExpense(fetchExpenseDetails());
+                    System.out.print("\n===== Expense added successfully . =====\n");
                     break;
 
-                case "2":
+                case 2:
                     expenses = expenseManager.getAllExpense();
-                    System.out.println("\n===== EXPENSES =====\n");
-                    for(Expense e: expenses){
-                        System.out.println(e);
+                    if(!expenses.isEmpty()){
+                        System.out.print("\n===== EXPENSES =====\n");
+                        for(Expense e: expenses){
+                            System.out.print(e);
+                        }
+                        System.out.print("\n===== EXPENSES =====\n");
+                    }
+                    else{
+                        System.out.print("\n===== No Expenses Found =====\n");
                     }
                     break;
 
-                case "3":
+                case 3:
                     expenses = expenseManager.getAllExpense();
-                    for(Expense e: expenses){
-                        System.out.println(e);
+                    if(!expenses.isEmpty()){
+                        System.out.print("\n===== EXPENSES =====\n");
+                        c=0;
+                        for(Expense e: expenses){
+                            System.out.print(e);
+                            c++;
+                        }
+                        System.out.print("\n===== EXPENSES =====\n");
+                        uID = InputHelper.getID("\nEnter the ID of expense you want to delete: ",c);
+                        expenseManager.deleteExpense(uID);
+                        System.out.print("\n===== Expense deleted successfully . =====\n");
                     }
-                    System.out.print("\nEnter the ID of expense you want to delete: ");
-                    int uID = Integer.parseInt(sc.nextLine());
-                    expenseManager.deleteExpense(uID);
+                    else{
+                        System.out.print("\n===== No Expenses Found =====\n");
+                    }
                     break;
 
-                case "4":
+                case 4:
                     expenses = expenseManager.getAllExpense();
-                    for(Expense e: expenses){
-                        System.out.println(e);
+                    if(!expenses.isEmpty()){
+                        System.out.print("\n===== EXPENSES =====\n");
+                        c=0;
+                        for(Expense e: expenses){
+                            System.out.println(e);
+                            c++;
+                        }
+                        System.out.print("\n===== EXPENSES =====\n");
+                        uID = InputHelper.getID("\nEnter the ID of expense you want to edit: ",c);
+                        double amount = InputHelper.getAmount();
+                        String category = InputHelper.getCategory();
+                        LocalDate date = InputHelper.getDate();
+                        String description = InputHelper.getDescription();
+                        System.out.println();
+                        expenseManager.editExpense(uID, amount, category, date, description);
+                        System.out.print("\n===== Expense edited successfully . =====\n");
                     }
-                    System.out.print("\nEnter the ID of expense you want to edit: ");
-                    uID = Integer.parseInt(sc.nextLine());
-                    System.out.print("Enter the amount: ");
-                    double amount = Double.parseDouble(sc.nextLine());
-                    System.out.print("Enter the category: ");
-                    String category = sc.nextLine();
-                    System.out.print("Enter the date(YYYY-MM-DD): ");
-                    LocalDate date = LocalDate.parse(sc.nextLine());
-                    System.out.print("Enter the description: ");
-                    String description = sc.nextLine();
-                    System.out.println();
-                    expenseManager.editExpense(uID, amount, category, date, description);
+                    else{
+                        System.out.print("\n===== No Expenses Found =====\n");
+                    }
                     break;
 
 
                 default:
-                    System.out.println("Invalid choice.");
+                    System.out.print("\n===== Error: Invalid choice =====\n");
                     break;
             }
         }
