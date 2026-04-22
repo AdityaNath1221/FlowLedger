@@ -1,44 +1,44 @@
-💸 FlowLedger
+# 💸 FlowLedger
 
-FlowLedger is a Java-based console application for tracking daily expenses.
-It allows users to record, view, edit, and manage expenses using a clean, layered architecture built with core OOP principles — now enhanced with persistent storage.
+**FlowLedger** is a Java-based console application for tracking daily expenses.
+It allows users to record, view, edit, and manage expenses using a clean, layered architecture built with core OOP principles — now enhanced with **persistent storage**.
 
 ---
 
-🚀 Features
+## 🚀 Features
 
-🟢 v1.0.0
+### 🟢 v1.0.0
 
 * ➕ Add new expenses
 * 📋 View all recorded expenses
 * 🔢 Auto-generated unique IDs
 * 🧠 Clean layered architecture (UI → Service → Model)
 
-🔥 v1.1.0
+### 🔥 v1.1.0
 
 * ✏️ Edit existing expenses
 * ❌ Delete expenses by ID
 * 🧩 Full CRUD support (Create, Read, Update, Delete)
 * 🧾 Improved CLI interaction flow
 
-⚡ v1.1.1
+### ⚡ v1.1.1
 
 * 🛡️ Robust input validation (no more crashes on invalid input)
-* 🔁 Safe input handling using centralized "InputHelper" utility
+* 🔁 Safe input handling using centralized `InputHelper` utility
 * 📅 Flexible date parsing (multiple formats supported)
 * 💬 Improved CLI error messages and user feedback
 * 🧠 Better separation of concerns (cleaner UI logic)
 
-🚀 v1.1.2
+### 🚀 v1.1.2
 
 * ✅ Accurate success/failure feedback for edit and delete operations
 * 🧠 Removed flawed ID range validation (now checks actual existence)
-* 🔁 Service layer returns operation status ("boolean")
+* 🔁 Service layer returns operation status (`boolean`)
 * ❌ Eliminated misleading success messages
 * 🧼 Minor bug fixes and cleanup
 * 🔒 Proper resource handling (Scanner closed on exit)
 
-💾 v1.2.0 (Latest)
+### 💾 v1.2.0 (Latest)
 
 * 📂 File-based persistence using CSV storage
 * 🔄 Automatic data loading on application startup
@@ -50,8 +50,9 @@ It allows users to record, view, edit, and manage expenses using a clean, layere
 
 ---
 
-🏗️ Project Structure
+## 🏗️ Project Structure
 
+```
 src/
 └── com/
     └── flowledger/
@@ -59,54 +60,64 @@ src/
         ├── services/   # Business logic & storage handling
         ├── models/     # Data models
         └── utility/    # Input handling utilities
+```
 
 ---
 
-🧠 Architecture Overview
+## 🧠 Architecture Overview
 
 FlowLedger follows a layered design:
 
-* Main → starts the application
-* ConsoleUI → handles user interaction
-* ExpenseManager → manages business logic & ID generation
-* StorageService → handles file persistence (CSV read/write)
-* Expense → represents expense data
-* InputHelper → handles validated user input
+* **Main** → starts the application
+* **ConsoleUI** → handles user interaction
+* **ExpenseManager** → manages business logic & ID generation
+* **StorageService** → handles file persistence (CSV read/write)
+* **Expense** → represents expense data
+* **InputHelper** → handles validated user input
 
+```
 Main → ConsoleUI → ExpenseManager → StorageService → File
            ↓
       InputHelper
+```
 
 ---
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
-* Java (Core)
+* **Java (Core)**
 * OOP Principles (Encapsulation, Separation of Concerns)
 * File Handling (CSV-based persistence)
 * CLI-based interface
 
 ---
 
-▶️ How to Run
+## ▶️ How to Run
 
-1. Clone the repository
+### 1. Clone the repository
 
+```bash
 git clone https://github.com/AdityaNath1221/FlowLedger.git
 cd FlowLedger
+```
 
-2. Compile the project
+### 2. Compile the project
 
+```bash
 javac -d out $(find src -name "*.java")
+```
 
-3. Run the application
+### 3. Run the application
 
+```bash
 java -cp out com.flowledger.app.Main
+```
 
 ---
 
-📸 Sample Usage
+## 📸 Sample Usage
 
+```
 ===== Expense Tracker Console UI =====
 
 Enter 1 to Add a new Expense.
@@ -114,34 +125,39 @@ Enter 2 to View all Expenses.
 Enter 3 to Delete an Expense.
 Enter 4 to Edit an Expense.
 Enter -1 to Exit.
+```
 
 ---
 
-🎯 Roadmap
+## 🎯 Roadmap
 
-🖥️ Future Enhancements
+### 📊 v1.3.0 (Next)
 
 * Expense analytics (total spending, category-wise breakdown)
 * Filtering by category and date
 * Search functionality
+
+### 🖥️ Future Enhancements
+
 * GUI using Java Swing / JavaFX
 * Export data (CSV/JSON)
+* Multi-user support
 * Integration with real-world use cases (e.g., small business tracking)
 
 ---
 
-🏷️ Version
+## 🏷️ Version
 
-v1.2.0 – Persistent storage with clean architecture and reliable data handling
+**v1.2.0** – Persistent storage with clean architecture and reliable data handling
 
 ---
 
-📄 License
+## 📄 License
 
 This project is licensed under the MIT License.
 
 ---
 
-🙌 Acknowledgment
+## 🙌 Acknowledgment
 
-Built as part of a hands-on journey to learn Java, OOP, and real-world system design — evolving from a simple CLI app into a stateful, persistent system.
+Built as part of a hands-on journey to learn Java, OOP, and real-world system design — evolving from a simple CLI app into a **stateful, persistent system**.
