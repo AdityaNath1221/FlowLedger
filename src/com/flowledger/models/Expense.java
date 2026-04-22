@@ -16,11 +16,6 @@ public class Expense{
         this.description = description;
     }
 
-    // public String getExpenseDetails(){
-    //     String details = this.amount + "|" + this.category + "|" + this.date + "|" + this.description;
-    //     return details;
-    // }
-
     public String toString(){
         return "\n===== ID#"+ID+" =====\n"+"\nAmount: "+amount+"\nCategory: "+category+"\nDate: "+date+"\nDescription: "+description+"\n";
     }

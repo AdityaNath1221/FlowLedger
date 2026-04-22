@@ -1,4 +1,5 @@
 out/
+ledgers/
 
 # Compiled class file
 *.class
