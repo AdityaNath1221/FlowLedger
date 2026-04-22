@@ -23,6 +23,18 @@ public class Expense{
     public int getID(){
         return ID;
     }
+    public double getAmount(){
+        return amount;
+    }
+    public String getCategory(){
+        return category;
+    }
+    public LocalDate getDate(){
+        return date;
+    }
+    public String getDescription(){
+        return description;
+    }
 
     public void setDetails(double amount, String category, LocalDate date, String description){
         this.amount = amount;

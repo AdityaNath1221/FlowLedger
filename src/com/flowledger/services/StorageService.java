@@ -5,6 +5,7 @@ import com.flowledger.models.Expense;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOError;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -76,6 +77,22 @@ public class StorageService {
     }
 
     public boolean setExpenses(ArrayList<Expense> expenses){
-
+        try{
+            FileWriter file = new FileWriter(ledger);
+            for(Expense e: expenses){
+                int ID = e.getID();
+                double amount = e.getAmount();
+                String category = e.getCategory();
+                LocalDate date = e.getDate();
+                String description = e.getDescription();
+                String line = ID+","+amount+","+category+","+date+",\""+description+"\"\n";
+                file.write(line);
+            }
+            file.close();
+            return true;
+        }catch(IOException ex){
+            System.out.print("\n===== Error: Could not write to file =====\n");
+        }
+        return false;
     }
 }
