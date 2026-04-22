@@ -2,19 +2,18 @@ package com.flowledger.app;
 
 import com.flowledger.models.Expense;
 import com.flowledger.services.ExpenseManager;
-import com.flowledger.services.StorageService;
 import com.flowledger.utility.InputHelper;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ConsoleUI{
     private ExpenseManager expenseManager;
-    private StorageService storageService;
+    // private StorageService storageService;
     private int ID = 1;
 
     public ConsoleUI(){
         expenseManager = new ExpenseManager();
-        storageService = new StorageService();
+        // storageService = new StorageService();
     }
 
     private Expense fetchExpenseDetails(){
