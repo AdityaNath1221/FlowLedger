@@ -1,7 +1,7 @@
 # 💸 FlowLedger
 
 **FlowLedger** is a Java-based console application for tracking daily expenses.
-It allows users to record, view, edit, and manage expenses using a clean, layered architecture built with core OOP principles — now enhanced with **persistent storage**.
+It allows users to record, manage, and persist expenses using a clean, layered architecture built on core OOP principles — now with an extensible **category management system**.
 
 ---
 
@@ -14,6 +14,8 @@ It allows users to record, view, edit, and manage expenses using a clean, layere
 * 🔢 Auto-generated unique IDs
 * 🧠 Clean layered architecture (UI → Service → Model)
 
+---
+
 ### 🔥 v1.1.0
 
 * ✏️ Edit existing expenses
@@ -21,32 +23,50 @@ It allows users to record, view, edit, and manage expenses using a clean, layere
 * 🧩 Full CRUD support (Create, Read, Update, Delete)
 * 🧾 Improved CLI interaction flow
 
+---
+
 ### ⚡ v1.1.1
 
-* 🛡️ Robust input validation (no more crashes on invalid input)
-* 🔁 Safe input handling using centralized `InputHelper` utility
-* 📅 Flexible date parsing (multiple formats supported)
-* 💬 Improved CLI error messages and user feedback
-* 🧠 Better separation of concerns (cleaner UI logic)
+* 🛡️ Robust input validation
+* 🔁 Centralized input handling (`InputHelper`)
+* 📅 Flexible date parsing (multiple formats)
+* 💬 Improved CLI feedback and error handling
+* 🧠 Cleaner separation of concerns
+
+---
 
 ### 🚀 v1.1.2
 
-* ✅ Accurate success/failure feedback for edit and delete operations
-* 🧠 Removed flawed ID range validation (now checks actual existence)
+* ✅ Accurate success/failure feedback
+* 🧠 Removed flawed ID validation logic
 * 🔁 Service layer returns operation status (`boolean`)
 * ❌ Eliminated misleading success messages
-* 🧼 Minor bug fixes and cleanup
-* 🔒 Proper resource handling (Scanner closed on exit)
+* 🔒 Proper resource handling
 
-### 💾 v1.2.0 (Latest)
+---
 
-* 📂 File-based persistence using CSV storage
-* 🔄 Automatic data loading on application startup
-* 💾 Real-time saving after add, edit, and delete operations
-* 🧠 Intelligent ID management (no duplicates after restart)
-* 🛡️ Safe parsing with invalid data handling
-* 📁 Automatic file and directory creation
-* 🔗 Clean separation between business logic and storage layer
+### 💾 v1.2.0
+
+* 📂 CSV-based file persistence
+* 🔄 Auto-loading data on startup
+* 💾 Real-time save after operations
+* 🧠 Smart ID management (no duplicates)
+* 🛡️ Safe parsing with error handling
+* 📁 Automatic file/directory creation
+* 🔗 Clean separation of storage layer
+
+---
+
+### 🆕 v1.3.0 (Latest)
+
+* 🗂️ **Category Management System**
+
+  * Create and manage custom categories
+  * Prevent duplicate categories using normalization
+* 🔄 Improved category integration with expenses
+* 💾 Persistent category storage (CSV-based)
+* 🧠 Smarter input validation for categories
+* 🧼 Codebase cleanup and structural improvements
 
 ---
 
@@ -70,13 +90,16 @@ FlowLedger follows a layered design:
 
 * **Main** → starts the application
 * **ConsoleUI** → handles user interaction
-* **ExpenseManager** → manages business logic & ID generation
-* **StorageService** → handles file persistence (CSV read/write)
-* **Expense** → represents expense data
-* **InputHelper** → handles validated user input
+* **ExpenseManager** → core business logic & ID handling
+* **CategoryService** → category management & validation
+* **StorageService** → file persistence (CSV)
+* **Models** → `Expense`, `Category`
+* **InputHelper** → validated user input
 
 ```
 Main → ConsoleUI → ExpenseManager → StorageService → File
+           ↓
+      CategoryService
            ↓
       InputHelper
 ```
@@ -86,8 +109,8 @@ Main → ConsoleUI → ExpenseManager → StorageService → File
 ## 🛠️ Tech Stack
 
 * **Java (Core)**
-* OOP Principles (Encapsulation, Separation of Concerns)
-* File Handling (CSV-based persistence)
+* Object-Oriented Programming (Encapsulation, Separation of Concerns)
+* File Handling (CSV persistence)
 * CLI-based interface
 
 ---
@@ -101,13 +124,13 @@ git clone https://github.com/AdityaNath1221/FlowLedger.git
 cd FlowLedger
 ```
 
-### 2. Compile the project
+### 2. Compile
 
 ```bash
 javac -d out $(find src -name "*.java")
 ```
 
-### 3. Run the application
+### 3. Run
 
 ```bash
 java -cp out com.flowledger.app.Main
@@ -124,6 +147,8 @@ Enter 1 to Add a new Expense.
 Enter 2 to View all Expenses.
 Enter 3 to Delete an Expense.
 Enter 4 to Edit an Expense.
+Enter 5 to View Categories.
+Enter 6 to Add Category.
 Enter -1 to Exit.
 ```
 
@@ -131,24 +156,21 @@ Enter -1 to Exit.
 
 ## 🎯 Roadmap
 
-### 📊 v1.3.0 (Next)
+### 🧠 Future Enhancements
 
 * Expense analytics (total spending, category-wise breakdown)
 * Filtering by category and date
 * Search functionality
-
-### 🖥️ Future Enhancements
-
-* GUI using Java Swing / JavaFX
-* Export data (CSV/JSON)
-* Multi-user support
-* Integration with real-world use cases (e.g., small business tracking)
+* JSON-based storage (replace CSV)
+* GUI (Java Swing / JavaFX)
+* Export functionality (CSV/JSON)
+* Real-world integrations (small business use cases 👀)
 
 ---
 
 ## 🏷️ Version
 
-**v1.2.0** – Persistent storage with clean architecture and reliable data handling
+**v1.3.0** – Category system with persistent storage and improved architecture
 
 ---
 
@@ -160,4 +182,4 @@ This project is licensed under the MIT License.
 
 ## 🙌 Acknowledgment
 
-Built as part of a hands-on journey to learn Java, OOP, and real-world system design — evolving from a simple CLI app into a **stateful, persistent system**.
+Built as part of a hands-on journey to learn Java, OOP, and real-world system design — evolving from a simple CLI tool into a **stateful, modular expense tracking system**.
