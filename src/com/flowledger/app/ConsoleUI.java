@@ -8,22 +8,10 @@ import java.util.ArrayList;
 
 public class ConsoleUI{
     private ExpenseManager expenseManager;
-    // private StorageService storageService;
     private int ID = 1;
 
     public ConsoleUI(){
         expenseManager = new ExpenseManager();
-        // storageService = new StorageService();
-    }
-
-    private Expense fetchExpenseDetails(){
-        double amount = InputHelper.getAmount();
-        String category = InputHelper.getCategory();
-        LocalDate date = InputHelper.getDate();
-        String description = InputHelper.getDescription();
-        Expense e = new Expense(ID, amount, category, date, description);
-        ID++;
-        return e;
     }
 
     public boolean start(){
@@ -46,7 +34,7 @@ public class ConsoleUI{
                     return false;
 
                 case 1:
-                    if(expenseManager.addExpense(fetchExpenseDetails())){
+                    if(expenseManager.addExpense()){
                         System.out.print("\n===== Expense added successfully =====\n");
                     }
                     else{
@@ -98,12 +86,17 @@ public class ConsoleUI{
                         }
                         System.out.print("\n===== EXPENSES =====\n");
                         uID = InputHelper.getID("\nEnter the ID of expense you want to edit: ");
-                        double amount = InputHelper.getAmount();
-                        String category = InputHelper.getCategory();
-                        LocalDate date = InputHelper.getDate();
-                        String description = InputHelper.getDescription();
-                        if(expenseManager.editExpense(uID, amount, category, date, description)){
-                            System.out.print("\n===== Expense edited successfully =====\n");
+                        if(expenseManager.exists(uID)){
+                            double amount = InputHelper.getAmount();
+                            String category = InputHelper.getCategory();
+                            LocalDate date = InputHelper.getDate();
+                            String description = InputHelper.getDescription();
+                            if(expenseManager.editExpense(uID, amount, category, date, description)){
+                                System.out.print("\n===== Expense edited successfully =====\n");
+                            }
+                            else{
+                                System.out.print("\n===== Expense not found =====\n");
+                            }
                         }
                         else{
                             System.out.print("\n===== Expense not found =====\n");
