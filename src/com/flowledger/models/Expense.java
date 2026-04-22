@@ -4,11 +4,11 @@ import java.time.LocalDate;
 public class Expense{
     private int ID;
     private double amount;
-    private String category;
+    private Category category;
     private LocalDate date;
     private String description;
 
-    public Expense(int ID, double amount, String category, LocalDate date, String description){
+    public Expense(int ID, double amount, Category category, LocalDate date, String description){
         this.ID = ID;
         this.amount = amount;
         this.category = category;
@@ -17,7 +17,7 @@ public class Expense{
     }
 
     public String toString(){
-        return "\n===== ID#"+ID+" =====\n"+"\nAmount: "+amount+"\nCategory: "+category+"\nDate: "+date+"\nDescription: "+description+"\n";
+        return "\n===== ID#"+ID+" =====\n"+"\nAmount: "+amount+"\nCategory: "+category.getName()+"\nDate: "+date+"\nDescription: "+description+"\n";
     }
 
     public int getID(){
@@ -26,7 +26,7 @@ public class Expense{
     public double getAmount(){
         return amount;
     }
-    public String getCategory(){
+    public Category getCategory(){
         return category;
     }
     public LocalDate getDate(){
@@ -36,10 +36,25 @@ public class Expense{
         return description;
     }
 
-    public void setDetails(double amount, String category, LocalDate date, String description){
+    public void setDetails(double amount, Category category, LocalDate date, String description){
         this.amount = amount;
         this.category = category;
         this.date = date;
         this.description = description;
+    }
+
+    public void setDetails(double amount, Category category, LocalDate date){
+        this.amount = amount;
+        this.category = category;
+        this.date = date;
+    }
+
+    public void setDetails(double amount, Category category){
+        this.amount = amount;
+        this.category = category;
+    }
+
+    public void setDetails(double amount){
+        this.amount = amount;
     }
 }

@@ -1,6 +1,8 @@
 package com.flowledger.app;
 
+import com.flowledger.models.Category;
 import com.flowledger.models.Expense;
+import com.flowledger.services.CategoryService;
 import com.flowledger.services.ExpenseManager;
 import com.flowledger.utility.InputHelper;
 import java.time.LocalDate;
@@ -8,9 +10,11 @@ import java.util.ArrayList;
 
 public class ConsoleUI{
     private ExpenseManager expenseManager;
+    private CategoryService categoryService;
 
     public ConsoleUI(){
         expenseManager = new ExpenseManager();
+        categoryService = new CategoryService();
     }
 
     public boolean start(){
@@ -18,7 +22,8 @@ public class ConsoleUI{
         ArrayList<Expense> expenses;
         double amount;
         LocalDate date;
-        String category, description;
+        Category category;
+        String description;
         int uID;
         while(true){
             System.out.print("\nChoice List:");
@@ -26,6 +31,8 @@ public class ConsoleUI{
             System.out.print("\nEnter 2 to view all Expenses.");
             System.out.print("\nEnter 3 to delete an Expense.");
             System.out.print("\nEnter 4 to edit an Expense.");
+            System.out.print("\nEnter 5 to view all categories.");
+            System.out.print("\nEnter 6 to add new category.");
             System.out.print("\nEnter -1 to exit.\n");
             int choice = InputHelper.getChoice();
 
@@ -37,7 +44,7 @@ public class ConsoleUI{
 
                 case 1:
                     amount = InputHelper.getAmount();
-                    category = InputHelper.getCategory();
+                    category = InputHelper.getCategory(categoryService.getCategories());
                     date = InputHelper.getDate();
                     description = InputHelper.getDescription();
                     if(expenseManager.addExpense(amount, category, date, description)){
@@ -94,7 +101,7 @@ public class ConsoleUI{
                         uID = InputHelper.getID("\nEnter the ID of expense you want to edit: ");
                         if(expenseManager.exists(uID)){
                             amount = InputHelper.getAmount();
-                            category = InputHelper.getCategory();
+                            category = InputHelper.getCategory(categoryService.getCategories());
                             date = InputHelper.getDate();
                             description = InputHelper.getDescription();
                             if(expenseManager.editExpense(uID, amount, category, date, description)){
@@ -110,6 +117,21 @@ public class ConsoleUI{
                     }
                     break;
 
+                case 5:
+                    ArrayList<Category> categories = categoryService.getCategories();
+                    System.out.print("\n===== AVAILABLE CATEGORIES =====\n");
+                    for(Category c: categories){
+                        System.out.print("\n"+c.getName()+"\n");
+                    }
+                    System.out.print("\n===== AVAILABLE CATEGORIES =====\n");
+                    break;
+
+                case 6:
+                    String newCategory = InputHelper.getNewCategory();
+                    if(!categoryService.createCategory(newCategory)){
+                        System.out.print("\n===== Error: Category already exists =====\n");
+                    }
+                    break;
 
                 default:
                     System.out.print("\n===== Error: Invalid choice =====\n");

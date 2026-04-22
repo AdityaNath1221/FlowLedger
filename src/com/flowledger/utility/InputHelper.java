@@ -1,8 +1,10 @@
 package com.flowledger.utility;
 
+import com.flowledger.models.Category;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputHelper {
@@ -67,9 +69,31 @@ public class InputHelper {
         }
     }
 
-    public static String getCategory(){
+    public static Category getCategory(ArrayList<Category> categories){
         while(true){
+            System.out.print("\n===== AVAILABLE CATEGORIES =====\n");
+            for(Category c: categories){
+                System.out.print("\n"+c.getName()+"\n");
+            }
             System.out.print("\nEnter the category: ");
+            String category = sc.nextLine();
+            if(!category.trim().isEmpty()){
+                for(Category c: categories){
+                    if(category.toLowerCase().equals(c.getName().toLowerCase())){
+                        return c;
+                    }
+                }
+                System.out.print("\n===== Error: Invalid Category =====\n");
+            }
+            else{
+                System.out.print("\n===== Error: Category blank =====\n");
+            }
+        }
+    }
+
+    public static String getNewCategory(){
+        while(true){
+            System.out.print("\nEnter the name of new category: ");
             String category = sc.nextLine();
             if(!category.trim().isEmpty()){
                 return category;

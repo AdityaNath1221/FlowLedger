@@ -1,17 +1,22 @@
 package com.flowledger.services;
 
+import com.flowledger.models.Category;
 import com.flowledger.models.Expense;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ExpenseManager{
     private ArrayList<Expense> expenses;
+    private ArrayList<Category> categories;
     private StorageService storageService;
+    private CategoryService categoryService;
     private int lastID;
 
     public ExpenseManager(){
         storageService = new StorageService();
+        categoryService = new CategoryService();
         expenses = storageService.getExpenses();
+        categories = categoryService.getCategories();
         lastID = 0;
         if(expenses.size()>0){
             for(Expense e: expenses){
@@ -34,7 +39,7 @@ public class ExpenseManager{
         return false;
     }
 
-    public boolean addExpense(double amount, String category, LocalDate date, String description){
+    public boolean addExpense(double amount, Category category, LocalDate date, String description){
         lastID++;
         Expense e = new Expense(lastID, amount, category, date, description);
         boolean flag = expenses.add(e);
@@ -48,7 +53,7 @@ public class ExpenseManager{
         return expenses;
     }
 
-    public boolean editExpense(int ID, double amount, String category, LocalDate date, String description){
+    public boolean editExpense(int ID, double amount, Category category, LocalDate date, String description){
         for(Expense e: expenses){
             if(e.getID() == ID){
                 e.setDetails(amount, category, date, description);
