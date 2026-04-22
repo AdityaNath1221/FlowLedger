@@ -75,7 +75,7 @@ public class StorageService {
         return expenses;
     }
 
-    public boolean setExpenses(ArrayList<Expense> expenses){
+    public boolean saveExpenses(ArrayList<Expense> expenses){
         try{
             FileWriter file = new FileWriter(ledger);
             for(Expense e: expenses){
