@@ -75,7 +75,7 @@ public class StorageService {
         Expense expense;
         try(Scanner scanner = new Scanner(ledger)){
             while(scanner.hasNextLine()){
-                String[] data = scanner.nextLine().split(",");
+                String[] data = scanner.nextLine().split(",", 5);
                 if(data.length==5){
                     int ID = Integer.parseInt(data[0]);
                     double amount = Double.parseDouble(data[1]);

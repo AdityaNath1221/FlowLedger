@@ -52,19 +52,22 @@ public class InputHelper {
     public static double getAmount(){
         while(true){
             System.out.print("\nEnter the amount: ");
-            if(sc.hasNextDouble()){
-                double amount = sc.nextDouble();
-                sc.nextLine();
-                if(amount>0){
-                    return amount;
-                }
-                else{
-                    System.out.print("\n===== Error: Invalid amount =====\n");
-                }
+            String input = sc.nextLine().trim();
+            if(input.isEmpty()){
+                System.out.print("\n===== Error: Amount blank =====\n");
             }
             else{
-                System.out.print("\n===== Error: Invalid decimal number =====\n");
-                sc.nextLine();
+                try{
+                    double amount = Double.parseDouble(input);
+                    if(amount>0){
+                        return amount;
+                    }
+                    else{
+                        System.out.print("\n===== Error: Invalid amount =====\n");
+                    }
+                }catch(NumberFormatException e){
+                    System.out.print("\n===== Error: Invalid decimal number =====\n");
+                }
             }
         }
     }
@@ -77,13 +80,14 @@ public class InputHelper {
             }
             System.out.print("\nEnter the category: ");
             String category = sc.nextLine();
-            if(!category.trim().isEmpty()){
+            if(!category.trim().isEmpty() && (category.split(" ").length == 1)){
+                category = category.substring(0,1).toUpperCase() + category.substring(1).toLowerCase();
                 for(Category c: categories){
-                    if(category.toLowerCase().equals(c.getName().toLowerCase())){
+                    if(c.getName().equals(category)){
                         return c;
                     }
                 }
-                System.out.print("\n===== Error: Invalid Category =====\n");
+                System.out.print("\n===== Error: Invalid category =====\n");
             }
             else{
                 System.out.print("\n===== Error: Category blank =====\n");

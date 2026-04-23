@@ -13,8 +13,8 @@ public class ConsoleUI{
     private CategoryService categoryService;
 
     public ConsoleUI(){
-        expenseManager = new ExpenseManager();
         categoryService = new CategoryService();
+        expenseManager = new ExpenseManager(categoryService);
     }
 
     public boolean start(){
@@ -128,7 +128,7 @@ public class ConsoleUI{
 
                 case 6:
                     String newCategory = InputHelper.getNewCategory();
-                    if(!categoryService.createCategory(newCategory)){
+                    if(categoryService.createCategory(newCategory)==null){
                         System.out.print("\n===== Error: Category already exists =====\n");
                     }
                     break;

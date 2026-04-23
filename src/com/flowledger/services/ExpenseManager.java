@@ -12,9 +12,9 @@ public class ExpenseManager{
     private CategoryService categoryService;
     private int lastID;
 
-    public ExpenseManager(){
+    public ExpenseManager(CategoryService service){
         storageService = new StorageService();
-        categoryService = new CategoryService();
+        categoryService = service;
         expenses = storageService.getExpenses();
         categories = categoryService.getCategories();
         lastID = 0;

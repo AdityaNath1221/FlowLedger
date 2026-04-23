@@ -42,19 +42,4 @@ public class Expense{
         this.date = date;
         this.description = description;
     }
-
-    public void setDetails(double amount, Category category, LocalDate date){
-        this.amount = amount;
-        this.category = category;
-        this.date = date;
-    }
-
-    public void setDetails(double amount, Category category){
-        this.amount = amount;
-        this.category = category;
-    }
-
-    public void setDetails(double amount){
-        this.amount = amount;
-    }
 }
