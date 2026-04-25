@@ -57,7 +57,7 @@ It allows users to record, manage, and persist expenses using a clean, layered a
 
 ---
 
-### 🆕 v1.3.0 (Latest)
+### 📦 v1.3.0
 
 * 🗂️ **Category Management System**
 
@@ -67,6 +67,21 @@ It allows users to record, manage, and persist expenses using a clean, layered a
 * 💾 Persistent category storage (CSV-based)
 * 🧠 Smarter input validation for categories
 * 🧼 Codebase cleanup and structural improvements
+
+---
+
+### 🆕 v1.3.1 (Latest)
+
+* 🗂️ Category Management System
+
+  * Create and manage custom categories
+  * Prevent duplicate categories using normalization
+* 💾 Persistent category storage (CSV-based)
+* 🔄 Improved integration between categories and expenses
+* 🧠 Stronger input validation for categories and amounts
+* 🛠️ Fixed CSV parsing for descriptions containing commas
+* 🧼 Codebase cleanup and structural simplification
+* 🚀 Improved overall stability and reliability
 
 ---
 
@@ -170,7 +185,7 @@ Enter -1 to Exit.
 
 ## 🏷️ Version
 
-**v1.3.0** – Category system with persistent storage and improved architecture
+**v1.3.1** – Stable release with improved CSV parsing, enhanced validation, and refined category management
 
 ---
 
