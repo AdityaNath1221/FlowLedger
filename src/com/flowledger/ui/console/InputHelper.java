@@ -1,6 +1,6 @@
-package com.flowledger.utility;
+package com.flowledger.ui.console;
 
-import com.flowledger.models.Category;
+import com.flowledger.core.models.Category;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,13 +8,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputHelper {
-    private static final Scanner sc = new Scanner(System.in);
+    private final Scanner sc;
 
-    public static void close(){
+    public InputHelper(){
+        sc = new Scanner(System.in);
+    }
+
+    public void close(){
         sc.close();
     }
 
-    public static int getChoice(){
+    public int getChoice(){
         while(true){
             System.out.print("\nEnter choice: ");
             if(sc.hasNextInt()){
@@ -29,7 +33,7 @@ public class InputHelper {
         }
     }
 
-    public static int getID(String msg){
+    public int getID(String msg){
         while(true){
             System.out.print(msg);
             if(sc.hasNextInt()){
@@ -49,7 +53,7 @@ public class InputHelper {
         }
     }
 
-    public static double getAmount(){
+    public double getAmount(){
         while(true){
             System.out.print("\nEnter the amount: ");
             String input = sc.nextLine().trim();
@@ -72,13 +76,13 @@ public class InputHelper {
         }
     }
 
-    public static Category getCategory(ArrayList<Category> categories){
+    public Category getCategory(ArrayList<Category> categories){
         while(true){
             System.out.print("\n===== AVAILABLE CATEGORIES =====\n");
             for(Category c: categories){
-                System.out.print("\n"+c.getName()+"\n");
+                System.out.print("\n"+c.getName());
             }
-            System.out.print("\nEnter the category: ");
+            System.out.print("\n\nEnter the category: ");
             String category = sc.nextLine();
             if(!category.trim().isEmpty() && (category.split(" ").length == 1)){
                 category = category.substring(0,1).toUpperCase() + category.substring(1).toLowerCase();
@@ -95,7 +99,7 @@ public class InputHelper {
         }
     }
 
-    public static String getNewCategory(){
+    public String getNewCategory(){
         while(true){
             System.out.print("\nEnter the name of new category: ");
             String category = sc.nextLine();
@@ -108,7 +112,7 @@ public class InputHelper {
         }
     }
 
-    public static String getDescription(){
+    public String getDescription(){
         while(true){
             System.out.print("\nEnter the description: ");
             String description = sc.nextLine();
@@ -122,7 +126,7 @@ public class InputHelper {
         }
     }
 
-    public static LocalDate getDate(){
+    public LocalDate getDate(){
         DateTimeFormatter[] formats = new DateTimeFormatter[] {
             DateTimeFormatter.ofPattern("d-M-yyyy"),
             DateTimeFormatter.ofPattern("d-M-yy"),

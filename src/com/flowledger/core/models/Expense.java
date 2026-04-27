@@ -1,4 +1,4 @@
-package com.flowledger.models;
+package com.flowledger.core.models;
 import java.time.LocalDate;
 
 public class Expense{

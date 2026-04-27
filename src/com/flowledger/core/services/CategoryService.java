@@ -1,15 +1,17 @@
-package com.flowledger.services;
+package com.flowledger.core.services;
 
-import com.flowledger.models.Category;
+import com.flowledger.core.models.Category;
+import com.flowledger.core.storage.CategoryStorageService;
+
 import java.util.ArrayList;
 
 public class CategoryService {
     private ArrayList<Category> categories;
-    private StorageService storageService;
+    private CategoryStorageService storageService;
 
-    public CategoryService(){
-        storageService = new StorageService();
-        categories = storageService.getCategories();
+    public CategoryService(CategoryStorageService service){
+        storageService = service;
+        categories = storageService.fetchData();
         if(categories.size()==0){
             createCategory("Food");
             createCategory("Healthcare");
@@ -64,7 +66,7 @@ public class CategoryService {
             name = normalize(name);
             Category c = new Category(name);
             categories.add(c);
-            storageService.saveCategories(categories);
+            storageService.saveData(categories);
             return c;
         }
         else{

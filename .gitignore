@@ -1,5 +1,7 @@
-out/
+production/
 data/
+.idea/
+FlowLedger.iml
 
 # Compiled class file
 *.class

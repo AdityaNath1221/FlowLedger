@@ -1,22 +1,24 @@
-package com.flowledger.services;
+package com.flowledger.core.services;
 
-import com.flowledger.models.Category;
-import com.flowledger.models.Expense;
+import com.flowledger.core.models.Category;
+import com.flowledger.core.models.Expense;
+import com.flowledger.core.storage.ExpenseStorageService;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class ExpenseManager{
+public class ExpenseService {
     private ArrayList<Expense> expenses;
     private ArrayList<Category> categories;
-    private StorageService storageService;
+    private ExpenseStorageService storageService;
     private CategoryService categoryService;
     private int lastID;
 
-    public ExpenseManager(CategoryService service){
-        storageService = new StorageService();
-        categoryService = service;
-        expenses = storageService.getExpenses();
-        categories = categoryService.getCategories();
+    public ExpenseService(CategoryService categoryService, ExpenseStorageService storageService){
+        this.storageService = storageService;
+        this.categoryService = categoryService;
+        expenses = storageService.fetchData();
+//        categories = categoryService.getCategories();
         lastID = 0;
         if(expenses.size()>0){
             for(Expense e: expenses){
@@ -43,7 +45,7 @@ public class ExpenseManager{
         lastID++;
         Expense e = new Expense(lastID, amount, category, date, description);
         boolean flag = expenses.add(e);
-        if(!storageService.saveExpenses(expenses)){
+        if(!storageService.saveData(expenses)){
             System.out.print("\n===== Error: Could not write to file =====\n");
         }
         return flag;
@@ -57,7 +59,7 @@ public class ExpenseManager{
         for(Expense e: expenses){
             if(e.getID() == ID){
                 e.setDetails(amount, category, date, description);
-                if(!storageService.saveExpenses(expenses)){
+                if(!storageService.saveData(expenses)){
                     System.out.print("\n===== Error: Could not write to file =====\n");
                 }
                 return true;
@@ -69,7 +71,7 @@ public class ExpenseManager{
     public boolean deleteExpense(int ID){
         boolean flag = expenses.removeIf(e -> e.getID() == ID);
         if(flag){
-            if(!storageService.saveExpenses(expenses)){
+            if(!storageService.saveData(expenses)){
                 System.out.print("\n===== Error: Could not write to file =====\n");
             }
         }

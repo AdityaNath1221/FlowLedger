@@ -1,4 +1,4 @@
-package com.flowledger.models;
+package com.flowledger.core.models;
 
 public class Category {
     private String categoryName;

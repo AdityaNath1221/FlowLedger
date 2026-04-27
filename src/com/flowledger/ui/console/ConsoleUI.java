@@ -1,31 +1,36 @@
-package com.flowledger.app;
+package com.flowledger.ui.console;
 
-import com.flowledger.models.Category;
-import com.flowledger.models.Expense;
-import com.flowledger.services.CategoryService;
-import com.flowledger.services.ExpenseManager;
-import com.flowledger.utility.InputHelper;
+import com.flowledger.core.controllers.AnalyticsController;
+import com.flowledger.core.controllers.CategoryController;
+import com.flowledger.core.controllers.ExpenseController;
+import com.flowledger.core.models.Category;
+import com.flowledger.core.models.Expense;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ConsoleUI{
-    private ExpenseManager expenseManager;
-    private CategoryService categoryService;
+    private final ExpenseController expenseController;
+    private final CategoryController categoryController;
+    private final AnalyticsController analyticsController;
+    private final InputHelper inputHelper;
 
-    public ConsoleUI(){
-        categoryService = new CategoryService();
-        expenseManager = new ExpenseManager(categoryService);
+    public ConsoleUI(ExpenseController expenseController, CategoryController categoryController, AnalyticsController analyticsController){
+        this.expenseController = expenseController;
+        this.categoryController = categoryController;
+        this.analyticsController = analyticsController;
+        inputHelper = new InputHelper();
     }
 
     public boolean start(){
         System.out.print("\n===== Expense Tracker Console UI =====\n");
-        ArrayList<Expense> expenses;
         double amount;
         LocalDate date;
         Category category;
         String description;
         int uID;
         while(true){
+            ArrayList<Expense> expenses = expenseController.getAllExpenses();
             System.out.print("\nChoice List:");
             System.out.print("\nEnter 1 to Add a new Expense.");
             System.out.print("\nEnter 2 to view all Expenses.");
@@ -33,21 +38,22 @@ public class ConsoleUI{
             System.out.print("\nEnter 4 to edit an Expense.");
             System.out.print("\nEnter 5 to view all categories.");
             System.out.print("\nEnter 6 to add new category.");
+            System.out.print("\nEnter 7 to get total spending.");
             System.out.print("\nEnter -1 to exit.\n");
-            int choice = InputHelper.getChoice();
+            int choice = inputHelper.getChoice();
 
             switch(choice){
                 case -1:
                     System.out.print("\n===== Exiting the Program =====\n");
-                    InputHelper.close();
+                    inputHelper.close();
                     return false;
 
                 case 1:
-                    amount = InputHelper.getAmount();
-                    category = InputHelper.getCategory(categoryService.getCategories());
-                    date = InputHelper.getDate();
-                    description = InputHelper.getDescription();
-                    if(expenseManager.addExpense(amount, category, date, description)){
+                    amount = inputHelper.getAmount();
+                    category = inputHelper.getCategory(categoryController.getAllCategories());
+                    date = inputHelper.getDate();
+                    description = inputHelper.getDescription();
+                    if(expenseController.addExpense(amount, category, date, description)){
                         System.out.print("\n===== Expense added successfully =====\n");
                     }
                     else{
@@ -56,7 +62,6 @@ public class ConsoleUI{
                     break;
 
                 case 2:
-                    expenses = expenseManager.getAllExpense();
                     if(!expenses.isEmpty()){
                         System.out.print("\n===== EXPENSES =====\n");
                         for(Expense e: expenses){
@@ -70,15 +75,14 @@ public class ConsoleUI{
                     break;
 
                 case 3:
-                    expenses = expenseManager.getAllExpense();
                     if(!expenses.isEmpty()){
                         System.out.print("\n===== EXPENSES =====\n");
                         for(Expense e: expenses){
                             System.out.print(e);
                         }
                         System.out.print("\n===== EXPENSES =====\n");
-                        uID = InputHelper.getID("\nEnter the ID of expense you want to delete: ");
-                        if(expenseManager.deleteExpense(uID)){
+                        uID = inputHelper.getID("\nEnter the ID of expense you want to delete: ");
+                        if(expenseController.deleteExpense(uID)){
                             System.out.print("\n===== Expense deleted successfully =====\n");
                         }
                         else{
@@ -91,20 +95,19 @@ public class ConsoleUI{
                     break;
 
                 case 4:
-                    expenses = expenseManager.getAllExpense();
                     if(!expenses.isEmpty()){
                         System.out.print("\n===== EXPENSES =====\n");
                         for(Expense e: expenses){
                             System.out.println(e);
                         }
                         System.out.print("\n===== EXPENSES =====\n");
-                        uID = InputHelper.getID("\nEnter the ID of expense you want to edit: ");
-                        if(expenseManager.exists(uID)){
-                            amount = InputHelper.getAmount();
-                            category = InputHelper.getCategory(categoryService.getCategories());
-                            date = InputHelper.getDate();
-                            description = InputHelper.getDescription();
-                            if(expenseManager.editExpense(uID, amount, category, date, description)){
+                        uID = inputHelper.getID("\nEnter the ID of expense you want to edit: ");
+                        if(expenseController.exist(uID)){
+                            amount = inputHelper.getAmount();
+                            category = inputHelper.getCategory(categoryController.getAllCategories());
+                            date = inputHelper.getDate();
+                            description = inputHelper.getDescription();
+                            if(expenseController.editExpense(uID, amount, category, date, description)){
                                 System.out.print("\n===== Expense edited successfully =====\n");
                             }
                         }
@@ -118,18 +121,29 @@ public class ConsoleUI{
                     break;
 
                 case 5:
-                    ArrayList<Category> categories = categoryService.getCategories();
+                    ArrayList<Category> categories = categoryController.getAllCategories();
                     System.out.print("\n===== AVAILABLE CATEGORIES =====\n");
                     for(Category c: categories){
-                        System.out.print("\n"+c.getName()+"\n");
+                        System.out.print("\n"+c.getName());
                     }
+                    System.out.println();
                     System.out.print("\n===== AVAILABLE CATEGORIES =====\n");
                     break;
 
                 case 6:
-                    String newCategory = InputHelper.getNewCategory();
-                    if(categoryService.createCategory(newCategory)==null){
+                    String newCategory = inputHelper.getNewCategory();
+                    if(categoryController.createCategory(newCategory)){
                         System.out.print("\n===== Error: Category already exists =====\n");
+                    }
+                    break;
+
+                case 7:
+                    if(expenses.isEmpty()){
+                        System.out.print("\n===== No Expenses Found =====\n");
+                    }
+                    else{
+                        double totalAmount = analyticsController.getTotalSpending(expenses);
+                        System.out.print("\nTotal Spending: "+totalAmount+"\n");
                     }
                     break;
 
