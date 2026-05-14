@@ -10,7 +10,6 @@ FlowLedger.iml
 *.log
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
